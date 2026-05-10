@@ -1,0 +1,141 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ── CSS Custom Properties ────────────────────────────────────────────── */
+@layer base {
+  :root {
+    --background:           248 245 240;
+    --foreground:           26 26 26;
+    --primary:              26 58 92;
+    --primary-foreground:   255 255 255;
+    --secondary:            244 239 230;
+    --secondary-foreground: 26 26 26;
+    --muted:                244 239 230;
+    --muted-foreground:     90 90 90;
+    --border:               232 223 208;
+    --ring:                 26 58 92;
+    --radius:               0.5rem;
+  }
+}
+
+/* ── Base resets ──────────────────────────────────────────────────────── */
+@layer base {
+  *, *::before, *::after { box-sizing: border-box; }
+
+  /* Explicit cursors — browser defaults are not always applied after Tailwind preflight */
+  a, [role="link"]                                { cursor: pointer; }
+  input, textarea, select, [contenteditable="true"] { cursor: text; }
+  input[type="checkbox"], input[type="radio"]     { cursor: pointer; }
+  input[type="range"]                             { cursor: ew-resize; }
+  [disabled], [aria-disabled="true"]              { cursor: not-allowed; }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-abelec-cream-light text-[#1a1a1a];
+    font-family: var(--font-sans), system-ui, sans-serif;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--font-slab), Georgia, serif;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin: 0;
+  }
+  h1 { font-size: clamp(44px, 6.2vw, 80px); line-height: 1.02; letter-spacing: -0.03em; }
+  h2 { font-size: clamp(32px, 3.4vw, 48px); line-height: 1.06; letter-spacing: -0.025em; }
+  h3 { font-size: 20px; line-height: 1.25; }
+  p  { margin: 0; }
+  a  { color: inherit; text-decoration: none; }
+  button { font-family: inherit; cursor: pointer; border: none; background: none; padding: 0; color: inherit; }
+}
+
+/* ── Utilities ────────────────────────────────────────────────────────── */
+@layer utilities {
+  .font-slab { font-family: var(--font-slab), Georgia, serif; }
+  .font-mono { font-family: var(--font-mono), ui-monospace, monospace; }
+
+  .eyebrow {
+    font-family: var(--font-mono), monospace;
+    font-size: 11.5px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: #d97e3a; /* abelec-orange */
+  }
+
+
+  /* Tabular-nums for numeric displays */
+  .numeric, .price, .counter-value, .stat-value {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum" 1;
+  }
+
+  /* Unified hover system for cards */
+  .card-interactive {
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+    cursor: pointer;
+  }
+  .card-interactive:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(26, 58, 92, 0.12);
+    border-color: rgba(217, 126, 58, 0.40);
+  }
+
+  /* FIG orientation card */
+  .fig-card {
+    box-shadow: 0 1px 3px rgba(26,58,92,0.08), 0 4px 16px rgba(26,58,92,0.06);
+    transition: transform 0.25s cubic-bezier(0.16,1,0.3,1),
+                box-shadow 0.25s cubic-bezier(0.16,1,0.3,1),
+                border-color 0.25s ease;
+  }
+  .fig-card:hover {
+    transform: translateY(-4px) !important;
+    box-shadow: 0 8px 32px rgba(26,58,92,0.12);
+  }
+
+  /* Announcement marquee — 4 copies, move by 25% (= 1 copy width) */
+  @keyframes abelec-marquee {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-25%); }
+  }
+  .announcement-track {
+    animation: abelec-marquee 36s linear infinite;
+    will-change: transform;
+  }
+
+  /* Hide scrollbar (cross-browser) */
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar { display: none; }
+
+  /* Rolling digit counter */
+  .digit-roll {
+    display: inline-block;
+    position: relative;
+    overflow: hidden;
+    width: 0.57em;
+    height: 1em;
+    vertical-align: baseline;
+  }
+  .digit-roll .stack {
+    display: flex;
+    flex-direction: column;
+    transition: transform .35s cubic-bezier(.15,.85,.15,1);
+  }
+  .digit-roll .stack span {
+    line-height: 1;
+    height: 1em;
+    text-align: center;
+    display: block;
+  }
+}

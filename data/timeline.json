@@ -1,0 +1,47 @@
+[
+  {
+    "year": "1983",
+    "label": "timeline.milestones.0.label",
+    "title": "timeline.milestones.0.title",
+    "description": "timeline.milestones.0.desc",
+    "imageUrl": "",
+    "archiveTag": "ARCHIVE_01",
+    "color": "#F8F5F0"
+  },
+  {
+    "year": "1997",
+    "label": "timeline.milestones.1.label",
+    "title": "timeline.milestones.1.title",
+    "description": "timeline.milestones.1.desc",
+    "imageUrl": "",
+    "archiveTag": "ARCHIVE_02",
+    "color": "#F0EDE6"
+  },
+  {
+    "year": "2008",
+    "label": "timeline.milestones.2.label",
+    "title": "timeline.milestones.2.title",
+    "description": "timeline.milestones.2.desc",
+    "imageUrl": "",
+    "archiveTag": "ARCHIVE_03",
+    "color": "#E8E3DA"
+  },
+  {
+    "year": "2018",
+    "label": "timeline.milestones.3.label",
+    "title": "timeline.milestones.3.title",
+    "description": "timeline.milestones.3.desc",
+    "imageUrl": "",
+    "archiveTag": "ARCHIVE_04",
+    "color": "#9fb5c8"
+  },
+  {
+    "year": "2026",
+    "label": "timeline.milestones.4.label",
+    "title": "timeline.milestones.4.title",
+    "description": "timeline.milestones.4.desc",
+    "imageUrl": "",
+    "archiveTag": "AUJOURD'HUI",
+    "color": "#1a3a5c"
+  }
+]
