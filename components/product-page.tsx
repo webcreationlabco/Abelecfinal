@@ -286,11 +286,11 @@ function PurchasePanel({ product }: { product: ProductData }) {
       {/* Price */}
       <div className="flex items-baseline gap-3 pt-1">
         <span className="font-slab font-bold text-abelec-navy-ink leading-none tracking-tight"
-          style={{ fontSize: "clamp(38px,4.5vw,48px)" }}>
+          style={{ fontSize: "clamp(26px,2.4vw,32px)" }}>
           {product.price.toFixed(2).replace(".", ",")}€
         </span>
         {product.oldPrice && (
-          <span className="text-[18px] text-abelec-muted-2 line-through">
+          <span className="text-[15px] text-abelec-muted-2 line-through">
             {product.oldPrice.toFixed(2).replace(".", ",")}€
           </span>
         )}
