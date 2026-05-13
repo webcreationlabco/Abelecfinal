@@ -402,7 +402,7 @@ function CatalogProductCard({ product, listMode }: { product: Product; listMode:
                 {product.oldPrice && (
                   <p className="text-[11px] text-abelec-muted line-through">{product.oldPrice.toFixed(2)} €</p>
                 )}
-                <p className="text-[18px] font-bold text-abelec-navy-ink">{product.price.toFixed(2)} €</p>
+                <p className="text-[14px] font-bold text-abelec-navy-ink">{product.price.toFixed(2)} €</p>
                 <span className={cn(
                   "inline-block mt-1 text-[10px] font-mono font-semibold px-2 py-0.5 rounded-full",
                   product.stock === "in"
@@ -501,8 +501,8 @@ function CatalogProductCard({ product, listMode }: { product: Product; listMode:
               {product.oldPrice && (
                 <p className="text-[11px] text-abelec-muted line-through leading-none">{product.oldPrice.toFixed(2)} €</p>
               )}
-              <p className="text-[17px] font-bold text-abelec-navy-ink leading-tight">
-                {product.price.toFixed(2)} <span className="text-[13px] font-medium">€</span>
+              <p className="text-[14px] font-bold text-abelec-navy-ink leading-tight">
+                {product.price.toFixed(2)} <span className="text-[11px] font-medium">€</span>
               </p>
             </div>
             {/* Add to cart */}
