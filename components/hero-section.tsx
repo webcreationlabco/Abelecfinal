@@ -94,28 +94,24 @@ export default function HeroSection() {
             className="object-cover object-center"
           />
 
-          {/* Left half — gradient overlay fading to transparent on the right */}
+          {/* Dark overlay */}
           <div
             className="absolute inset-0 pointer-events-none"
-            style={{
-              background: "linear-gradient(to right, rgba(8,18,36,0.72) 0%, rgba(8,18,36,0.72) 42%, rgba(8,18,36,0.18) 68%, rgba(8,18,36,0) 100%)",
-            }}
+            style={{ background: "rgba(8,18,36,0.48)" }}
           />
 
-          {/* Headline — left aligned, left half */}
-          <div
-            className="absolute inset-0 z-10 flex flex-col justify-center"
-            style={{ padding: "clamp(24px,4vw,52px) clamp(24px,4.5vw,56px)" }}
-          >
+          {/* Headline — centered */}
+          <div className="absolute inset-0 z-10 flex items-center justify-center text-center px-6">
             <motion.h1
-              initial={{ opacity: 0, x: -18 }}
-              animate={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
-              className="text-white font-slab leading-[1.1] max-w-[480px]"
+              className="text-white font-slab leading-[1.1]"
               style={{
-                fontSize: "clamp(22px, 3.2vw, 44px)",
+                fontSize: "clamp(22px, 3.2vw, 46px)",
                 letterSpacing: "-0.02em",
-                textShadow: "0 2px 12px rgba(0,0,0,0.25)",
+                textShadow: "0 2px 16px rgba(0,0,0,0.3)",
+                maxWidth: "640px",
               }}
             >
               La pièce détachée électroménager depuis 1983.
