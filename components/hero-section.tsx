@@ -3,29 +3,12 @@
 import { useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Search, ChevronDown, Star, ShieldCheck, Truck, Package } from "lucide-react";
+import { Search, Star, ShieldCheck, Truck, Package } from "lucide-react";
 import { useT } from "@/lib/i18n";
 import { cn } from "@/lib/utils";
 import ApplianceReferenceModal from "@/components/modals/appliance-reference-modal";
 import BreakdownModal          from "@/components/modals/breakdown-modal";
 import PartReferenceModal      from "@/components/modals/part-reference-modal";
-
-/* ─── Appliance / brand lists ────────────────────────────────────────────── */
-const APPLIANCES = [
-  { value: "lave-linge",     label: "Lave-linge" },
-  { value: "lave-vaisselle", label: "Lave-vaisselle" },
-  { value: "refrigerateur",  label: "Réfrigérateur" },
-  { value: "four",           label: "Four & Cuisinière" },
-  { value: "seche-linge",    label: "Sèche-linge" },
-  { value: "aspirateur",     label: "Aspirateur" },
-  { value: "micro-ondes",    label: "Micro-ondes" },
-];
-
-const BRANDS = [
-  "Bosch","Siemens","Whirlpool","AEG","Indesit",
-  "Hotpoint","Miele","Electrolux","Samsung","LG",
-  "Beko","Candy","Zanussi","Brandt",
-];
 
 /* ─── Orientation cards ──────────────────────────────────────────────────── */
 type ModalId = "appliance" | "breakdown" | "part";
@@ -65,12 +48,6 @@ function OrientationCard({ card, idx, onOpen }: { card: (typeof CARDS)[number]; 
   );
 }
 
-const fadeUp = (delay = 0) => ({
-  initial: { opacity: 0, y: 18 },
-  animate: { opacity: 1, y: 0 },
-  transition: { delay, duration: 0.62, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] },
-});
-
 function TrustChip({ icon: Icon, label, sub }: { icon: React.ElementType; label: string; sub?: string }) {
   return (
     <div className="flex items-center gap-2">
@@ -84,192 +61,126 @@ function TrustChip({ icon: Icon, label, sub }: { icon: React.ElementType; label:
 /* ─── Hero section ───────────────────────────────────────────────────────── */
 export default function HeroSection() {
   const t = useT();
-  const [appliance, setAppliance]     = useState("");
-  const [brand, setBrand]             = useState("");
   const [query, setQuery]             = useState("");
   const [activeModal, setActiveModal] = useState<ModalId | null>(null);
 
   return (
     <>
       {/* ══════════════════════════════════════════════════════════════
-          PART 1 — image card (55-60vh) + search zone below
+          PART 1 — editorial image card + search zone
       ══════════════════════════════════════════════════════════════ */}
       <section
         className="w-full"
         style={{
           background: "linear-gradient(180deg,#F8F5F0 0%,#F4EFE6 100%)",
-          padding: "clamp(28px,4.5vw,60px) clamp(12px,4vw,80px) 0",
+          padding: "clamp(32px,5vw,64px) clamp(24px,6vw,96px) 0",
         }}
       >
-        {/* ── Hero image card ───────────────────────────────────────── */}
+        {/* ── Editorial card ───────────────────────────────────────── */}
         <div
           className="relative mx-auto overflow-hidden"
-          style={{ borderRadius: "16px", height: "clamp(260px,58vh,540px)" }}
+          style={{
+            borderRadius: "14px",
+            height: "clamp(200px,38vh,340px)",
+            maxWidth: "1080px",
+          }}
         >
-          {/* Blurred warehouse photo */}
+          {/* Full-bleed warehouse photo */}
           <Image
             src="/warehouse-hero.jpg"
             alt=""
             fill
             priority
             className="object-cover object-center"
-            style={{ filter: "blur(4px)", transform: "scale(1.04)" }}
           />
-          {/* Dark overlay */}
-          <div className="absolute inset-0 pointer-events-none" style={{ background: "rgba(8,18,36,0.42)" }} />
 
-          {/* Centered headline content only */}
+          {/* Left half — gradient overlay fading to transparent on the right */}
           <div
-            className="absolute inset-0 z-10 flex flex-col items-center justify-center text-center"
-            style={{ padding: "clamp(28px,5vw,64px) clamp(16px,4vw,56px)" }}
+            className="absolute inset-0 pointer-events-none"
+            style={{
+              background: "linear-gradient(to right, rgba(8,18,36,0.72) 0%, rgba(8,18,36,0.72) 42%, rgba(8,18,36,0.18) 68%, rgba(8,18,36,0) 100%)",
+            }}
+          />
+
+          {/* Headline — left aligned, left half */}
+          <div
+            className="absolute inset-0 z-10 flex flex-col justify-center"
+            style={{ padding: "clamp(24px,4vw,52px) clamp(24px,4.5vw,56px)" }}
           >
-            <motion.p
-              {...fadeUp(0)}
-              className="eyebrow mb-5 sm:mb-7"
-              style={{ color: "rgba(255,255,255,0.58)" }}
-            >
-              EST. · ENTREPRISE FAMILIALE BELGE · FONDÉE EN 1983
-            </motion.p>
-
             <motion.h1
-              {...fadeUp(0.08)}
-              className="text-white mx-auto mb-4 sm:mb-6"
-              style={{ maxWidth: "720px" }}
+              initial={{ opacity: 0, x: -18 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.65, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+              className="text-white font-slab leading-[1.1] max-w-[480px]"
+              style={{
+                fontSize: "clamp(22px, 3.2vw, 44px)",
+                letterSpacing: "-0.02em",
+                textShadow: "0 2px 12px rgba(0,0,0,0.25)",
+              }}
             >
-              <span className="block">{t("hero.title1")}</span>
-              <span className="block text-abelec-orange italic font-medium">{t("hero.title2")}</span>
+              La pièce détachée électroménager depuis 1983.
             </motion.h1>
-
-            <motion.p
-              {...fadeUp(0.16)}
-              className="text-white/70 text-[15px] sm:text-[18px] leading-relaxed mx-auto max-sm:hidden"
-              style={{ maxWidth: "500px" }}
-            >
-              {t("hero.sub1")}{" "}
-              <strong className="text-white">{t("hero.sub2")}</strong>
-            </motion.p>
           </div>
         </div>
 
-        {/* ── Search zone — cream bg, directly below card ─────────────── */}
+        {/* ── Search zone ──────────────────────────────────────────── */}
         <div
           className="mx-auto"
           style={{
-            paddingTop:    "clamp(32px,4vw,52px)",
-            paddingBottom: "clamp(36px,5vw,64px)",
+            maxWidth: "1080px",
+            paddingTop:    "clamp(28px,3.5vw,48px)",
+            paddingBottom: "clamp(32px,4.5vw,60px)",
           }}
         >
           {/* Label */}
           <motion.p
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.22, duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+            transition={{ delay: 0.2, duration: 0.5, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             className="text-center font-mono text-[10.5px] uppercase tracking-[0.18em] text-abelec-navy mb-4"
           >
             {t("hero.searchLabel")}
           </motion.p>
 
-          {/* Search form */}
+          {/* Search bar — input + button only */}
           <motion.form
             initial={{ opacity: 0, y: 14 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.28, duration: 0.55, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
+            transition={{ delay: 0.26, duration: 0.55, ease: [0.16, 1, 0.3, 1] as [number, number, number, number] }}
             onSubmit={(e) => e.preventDefault()}
+            className="flex items-center bg-white rounded-2xl overflow-hidden"
+            style={{
+              height: "60px",
+              border: "1.5px solid #E8DFD0",
+              boxShadow: "0 4px 24px rgba(26,58,92,0.08)",
+            }}
           >
-            {/* Desktop single-row */}
-            <div
-              className="hidden md:flex bg-white rounded-2xl overflow-hidden"
-              style={{
-                height: "64px",
-                border: "1.5px solid #E8DFD0",
-                boxShadow: "0 4px 24px rgba(26,58,92,0.09)",
-              }}
+            <div className="flex-1 flex items-center gap-3 px-5">
+              <Search size={16} className="text-abelec-muted-2 shrink-0" />
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                placeholder="Référence, marque ou modèle..."
+                className="flex-1 bg-transparent outline-none text-[15px] text-abelec-navy-ink placeholder:text-abelec-muted-2"
+              />
+            </div>
+            <button
+              type="submit"
+              className="bg-abelec-orange hover:bg-abelec-orange-dark text-white font-bold text-[15px] px-7 h-full flex items-center gap-2 transition-colors shrink-0 rounded-r-[14px]"
+              style={{ boxShadow: "inset 0 -2px 0 rgba(0,0,0,0.12)" }}
             >
-              <div className="relative flex items-center border-r border-abelec-cream-line" style={{ minWidth: "178px" }}>
-                <select
-                  value={appliance}
-                  onChange={(e) => setAppliance(e.target.value)}
-                  className="appearance-none pl-5 pr-9 h-full w-full text-[14px] bg-transparent outline-none cursor-pointer font-medium"
-                  style={{ color: appliance ? "#0f2340" : "#8a8a8a" }}
-                >
-                  <option value="">Type d&apos;appareil</option>
-                  {APPLIANCES.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
-                </select>
-                <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-abelec-muted-2 pointer-events-none" />
-              </div>
-
-              <div className="relative flex items-center border-r border-abelec-cream-line" style={{ minWidth: "148px" }}>
-                <select
-                  value={brand}
-                  onChange={(e) => setBrand(e.target.value)}
-                  className="appearance-none pl-5 pr-9 h-full w-full text-[14px] bg-transparent outline-none cursor-pointer font-medium"
-                  style={{ color: brand ? "#0f2340" : "#8a8a8a" }}
-                >
-                  <option value="">Marque</option>
-                  {BRANDS.map(b => <option key={b} value={b.toLowerCase()}>{b}</option>)}
-                </select>
-                <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-abelec-muted-2 pointer-events-none" />
-              </div>
-
-              <div className="flex-1 flex items-center gap-3 px-5">
-                <Search size={16} className="text-abelec-muted-2 shrink-0" />
-                <input
-                  type="text"
-                  value={query}
-                  onChange={(e) => setQuery(e.target.value)}
-                  placeholder="Référence ou modèle..."
-                  className="flex-1 bg-transparent outline-none text-[15px] text-abelec-navy-ink placeholder:text-abelec-muted-2"
-                />
-              </div>
-
-              <button
-                type="submit"
-                className="bg-abelec-orange hover:bg-abelec-orange-dark text-white font-bold text-[15px] px-7 h-full flex items-center gap-2 transition-colors shrink-0 rounded-r-[14px]"
-                style={{ boxShadow: "inset 0 -2px 0 rgba(0,0,0,0.12)" }}
-              >
-                <Search size={15} strokeWidth={2.3} />
-                {t("hero.searchBtn")}
-              </button>
-            </div>
-
-            {/* Mobile stacked */}
-            <div className="flex md:hidden flex-col gap-2">
-              <div className="relative bg-white rounded-xl border border-abelec-cream-line" style={{ height: "52px" }}>
-                <select value={appliance} onChange={e => setAppliance(e.target.value)}
-                  className="appearance-none w-full h-full pl-4 pr-9 text-[14px] bg-transparent outline-none cursor-pointer font-medium text-abelec-navy">
-                  <option value="">Type d&apos;appareil</option>
-                  {APPLIANCES.map(a => <option key={a.value} value={a.value}>{a.label}</option>)}
-                </select>
-                <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-abelec-muted-2 pointer-events-none" />
-              </div>
-              <div className="relative bg-white rounded-xl border border-abelec-cream-line" style={{ height: "52px" }}>
-                <select value={brand} onChange={e => setBrand(e.target.value)}
-                  className="appearance-none w-full h-full pl-4 pr-9 text-[14px] bg-transparent outline-none cursor-pointer font-medium text-abelec-navy">
-                  <option value="">Marque</option>
-                  {BRANDS.map(b => <option key={b} value={b.toLowerCase()}>{b}</option>)}
-                </select>
-                <ChevronDown size={13} className="absolute right-3 top-1/2 -translate-y-1/2 text-abelec-muted-2 pointer-events-none" />
-              </div>
-              <div className="flex items-center gap-3 bg-white rounded-xl border border-abelec-cream-line px-4" style={{ height: "52px" }}>
-                <Search size={15} className="text-abelec-muted-2 shrink-0" />
-                <input type="text" value={query} onChange={e => setQuery(e.target.value)}
-                  placeholder="Référence ou modèle..."
-                  className="flex-1 bg-transparent outline-none text-[14px] text-abelec-navy placeholder:text-abelec-muted-2" />
-              </div>
-              <button type="submit"
-                className="bg-abelec-orange text-white font-bold text-[15px] rounded-xl flex items-center justify-center gap-2"
-                style={{ height: "52px" }}>
-                <Search size={15} strokeWidth={2.3} /> {t("hero.searchBtn")}
-              </button>
-            </div>
+              <Search size={15} strokeWidth={2.3} className="hidden sm:block" />
+              {t("hero.searchBtn")}
+            </button>
           </motion.form>
 
           {/* Trust dots */}
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 0.42, duration: 0.5 }}
-            className="flex items-center justify-center gap-5 sm:gap-8 flex-wrap mt-5"
+            transition={{ delay: 0.4, duration: 0.5 }}
+            className="flex items-center justify-center gap-5 sm:gap-8 flex-wrap mt-4"
           >
             {([t("hero.searchMeta1"), t("hero.searchMeta2"), t("hero.searchMeta3")] as string[]).map((label, i) => (
               <span key={i} className="flex items-center gap-2 text-[11.5px] text-abelec-muted font-mono">
@@ -282,7 +193,7 @@ export default function HeroSection() {
       </section>
 
       {/* ══════════════════════════════════════════════════════════════
-          PART 2 — trust bar (4.8/5 · garantie · expédition · stock)
+          PART 2 — trust bar
       ══════════════════════════════════════════════════════════════ */}
       <div className="border-y border-abelec-cream-line bg-white">
         <div className="max-w-[1240px] mx-auto px-4 lg:px-12 py-3 sm:py-3.5 flex items-center justify-center gap-4 sm:gap-8 flex-wrap">
@@ -316,7 +227,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* ── Modals ──────────────────────────────────────────────────────────── */}
+      {/* ── Modals ────────────────────────────────────────────────────────── */}
       <ApplianceReferenceModal open={activeModal === "appliance"} onClose={() => setActiveModal(null)} />
       <BreakdownModal          open={activeModal === "breakdown"} onClose={() => setActiveModal(null)} />
       <PartReferenceModal      open={activeModal === "part"}      onClose={() => setActiveModal(null)} />
