@@ -283,6 +283,9 @@ export default function Header() {
           {/* Right controls — right-aligned */}
           <div className="flex items-center gap-1 justify-end">
             <LangSwitcher scrolled={false} />
+            <Link href="/partenaires" className="hidden lg:flex items-center px-3 py-2 rounded-lg text-[14px] font-medium text-abelec-navy-ink hover:bg-abelec-navy/[0.06] transition-colors">
+              Partenaires
+            </Link>
             <Link href="/contact" className="hidden sm:flex items-center px-3 py-2 rounded-lg text-[14px] font-medium text-abelec-navy-ink hover:bg-abelec-navy/[0.06] transition-colors" aria-label="Contact">
               Contact
             </Link>
@@ -386,6 +389,9 @@ export default function Header() {
                 {searchOpen ? <X size={15} strokeWidth={2} /> : <Search size={15} strokeWidth={1.8} />}
               </button>
               <LangSwitcher scrolled={true} />
+              <Link href="/partenaires" className="hidden lg:flex items-center px-2.5 py-1.5 rounded-full text-[13px] font-medium text-abelec-navy-ink hover:bg-abelec-navy/[0.06] transition-colors">
+                Partenaires
+              </Link>
               <Link href="/contact" className="hidden sm:flex items-center px-2.5 py-1.5 rounded-full text-[13px] font-medium text-abelec-navy-ink hover:bg-abelec-navy/[0.06] transition-colors">
                 Contact
               </Link>

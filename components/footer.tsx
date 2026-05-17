@@ -36,12 +36,13 @@ export default function Footer() {
   const SERVICE_HREFS = [
     "/suivi-commande",
     "/contact",
-    "/partenaires",
+    "/contact?sujet=pro",
     "/livraison-retours",
     "/cgv#garantie",
   ];
   const COMPANY_HREFS = [
     "/a-propos",
+    "/partenaires",
     "/#timeline",
     "/marques",
     "/cgv",
