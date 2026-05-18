@@ -1,9 +1,10 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Lock } from "lucide-react";
+import { Lock, ArrowRight } from "lucide-react";
 import { useT, useI18n } from "@/lib/i18n";
 
 // ── KPI data ──────────────────────────────────────────────────────────────
@@ -199,43 +200,57 @@ export default function TrustSection() {
 
           </motion.div>
 
-          {/* ── BLOC 3 — KPI logistiques ─────────────────────────────── */}
+          {/* ── BLOC 3 — Nos partenaires ─────────────────────────────── */}
           <motion.div
             initial={{ opacity: 0, y: 18 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.14, duration: 0.4 }}
-            className="bg-white rounded-[16px] border border-abelec-cream-line p-6"
+            className="bg-white rounded-[16px] border border-abelec-cream-line p-6 flex flex-col"
           >
-            <p className="font-mono text-[10px] text-abelec-muted-2 uppercase tracking-[0.12em] mb-6">
-              03 · {t("trust.kpiTitle")}
+            <p className="font-mono text-[10px] text-abelec-muted-2 uppercase tracking-[0.12em] mb-5">
+              03 · Nos partenaires
             </p>
 
-            <div className="space-y-5">
-              {KPI_BARS.map((kpi, i) => (
-                <div key={kpi.labelKey} className="flex items-center gap-4">
-                  {/* Big number */}
-                  <span className="font-slab font-bold text-[clamp(17px,2.5vw,22px)] tracking-tight w-14 sm:w-16 shrink-0 tabular-nums" style={{ color: "#E8732A" }}>
-                    {kpi.display}
-                  </span>
-                  {/* Bar + label */}
-                  <div className="flex-1 min-w-0">
-                    <span className="font-mono text-[10px] text-abelec-muted uppercase tracking-[0.05em] block mb-1.5 truncate">
-                      {t(kpi.labelKey)}
-                    </span>
-                    <div className="h-[7px] bg-abelec-cream-light rounded-full overflow-hidden">
-                      <motion.div
-                        initial={{ width: 0 }}
-                        whileInView={{ width: `${kpi.value}%` }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.3 + i * 0.1, duration: 0.8, ease: "easeOut" }}
-                        className="h-full rounded-full"
-                        style={{ backgroundColor: kpi.color }}
-                      />
-                    </div>
+            <div className="grid grid-cols-3 gap-2.5 flex-1">
+              {[
+                { name: "Repair Café BXL",    abbr: "RC" },
+                { name: "Résidence Les Pins", abbr: "RL" },
+                { name: "TechFix Pro",         abbr: "TF" },
+                { name: "Foyer St-Joseph",     abbr: "FS" },
+                { name: "ElectroShop",         abbr: "ES" },
+                { name: "Repair Café Gand",    abbr: "RG" },
+              ].map(({ name, abbr }) => (
+                <div
+                  key={name}
+                  className="group flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl border border-abelec-cream-line bg-abelec-cream-light/60 hover:border-abelec-orange transition-all duration-200 cursor-default"
+                  style={{ minHeight: "72px" }}
+                >
+                  <div
+                    className="w-9 h-9 rounded-lg flex items-center justify-center font-slab font-bold text-[12px] transition-all duration-200"
+                    style={{
+                      background: "#E8E4DE",
+                      color: "#8a8a8a",
+                      filter: "grayscale(1)",
+                    }}
+                  >
+                    <span className="group-hover:text-abelec-navy transition-colors duration-200">{abbr}</span>
                   </div>
+                  <p className="font-mono text-[9px] uppercase tracking-[0.07em] text-abelec-muted-2 text-center leading-tight group-hover:text-abelec-navy transition-colors duration-200">
+                    {name}
+                  </p>
                 </div>
               ))}
+            </div>
+
+            <div className="mt-5 pt-4 border-t border-abelec-cream-line">
+              <Link
+                href="/partenaires"
+                className="inline-flex items-center gap-1.5 text-[13px] font-semibold text-abelec-orange hover:text-[#b8612a] transition-colors"
+              >
+                Voir plus
+                <ArrowRight size={14} strokeWidth={2.2} />
+              </Link>
             </div>
           </motion.div>
 
