@@ -212,33 +212,40 @@ export default function TrustSection() {
               03 · Nos partenaires
             </p>
 
-            <div className="grid grid-cols-3 gap-2.5 flex-1">
+            <div className="flex flex-col gap-2.5 flex-1">
               {[
-                { name: "Repair Café BXL",    abbr: "RC" },
-                { name: "Résidence Les Pins", abbr: "RL" },
-                { name: "TechFix Pro",         abbr: "TF" },
-                { name: "Foyer St-Joseph",     abbr: "FS" },
-                { name: "ElectroShop",         abbr: "ES" },
-                { name: "Repair Café Gand",    abbr: "RG" },
-              ].map(({ name, abbr }) => (
+                {
+                  label: "Repair Cafés & ASBL",
+                  desc: "Tarifs préférentiels pour les initiatives citoyennes de réparation. Support technique dédié et livraison 48h.",
+                  color: "#2563EB",
+                  bg: "#EFF6FF",
+                },
+                {
+                  label: "Foyers & Institutions",
+                  desc: "Compte pro avec facturation mensuelle et interlocuteur unique pour résidences et structures sociales.",
+                  color: "#059669",
+                  bg: "#ECFDF5",
+                },
+                {
+                  label: "Professionnels & Enseignes",
+                  desc: "Conditions tarifaires négociables, stock de 100 000 pièces et livraison B2B Europe pour les pros.",
+                  color: "#D97E3A",
+                  bg: "#FFF7ED",
+                },
+              ].map(({ label, desc, color, bg }) => (
                 <div
-                  key={name}
-                  className="group flex flex-col items-center justify-center gap-1.5 p-3 rounded-xl border border-abelec-cream-line bg-abelec-cream-light/60 hover:border-abelec-orange transition-all duration-200 cursor-default"
-                  style={{ minHeight: "72px" }}
+                  key={label}
+                  className="flex items-start gap-3 p-3.5 rounded-xl border border-abelec-cream-line"
+                  style={{ background: bg }}
                 >
-                  <div
-                    className="w-9 h-9 rounded-lg flex items-center justify-center font-slab font-bold text-[12px] transition-all duration-200"
-                    style={{
-                      background: "#E8E4DE",
-                      color: "#8a8a8a",
-                      filter: "grayscale(1)",
-                    }}
-                  >
-                    <span className="group-hover:text-abelec-navy transition-colors duration-200">{abbr}</span>
+                  <span
+                    className="w-2 h-2 rounded-full shrink-0 mt-1.5"
+                    style={{ background: color }}
+                  />
+                  <div>
+                    <p className="font-slab font-bold text-[13px] text-abelec-navy leading-tight mb-0.5">{label}</p>
+                    <p className="text-[11.5px] text-abelec-muted leading-relaxed">{desc}</p>
                   </div>
-                  <p className="font-mono text-[9px] uppercase tracking-[0.07em] text-abelec-muted-2 text-center leading-tight group-hover:text-abelec-navy transition-colors duration-200">
-                    {name}
-                  </p>
                 </div>
               ))}
             </div>
